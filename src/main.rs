@@ -10,9 +10,9 @@ mod emulator;
 use pixels::Error;
 
 fn main() -> Result<(), Error> {
-    // let program =
+    // let times_prog =
     //     "A2 0A 8E 00 00 A2 03 8E 01 00 AC 00 00 A9 00 18 6D 01 00 88 D0 FA 8D 02 00 EA EA EA";
-    let sprt_prog = "A2 90 8E 00 00 A2 01 8E 01 00 A9 00 8D 02 00 8D 03 00
+    let sqrt_prog = "A2 90 8E 00 00 A2 01 8E 01 00 A9 00 8D 02 00 8D 03 00
 8D 06 00 A2 08 0E 06 00
 0E 00 00 2E 01 00 2E 02
 00 2E 03 00 0E 00 00 2E
@@ -26,5 +26,5 @@ AD 06 00 8D 04 00 A9 00
 ED 05 00 8D 03 00 EE 06
 00 CA D0 A9 60
 ";
-    emulator::mos_6502_emulator(sprt_prog)
+    emulator::mos_6502_emulator(sqrt_prog)
 }
