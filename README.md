@@ -28,7 +28,7 @@ Then press space to step through the code, one instruction at a time.
 
 ### Changing the program
 
-The emulator is preloaded with a square root program (**_that is broken - if anyone wants to it would be debug much appreciated_**). There is also a function the performs 3 multipled by 10 using repeated addition but this is commented out. 
+The emulator is preloaded with a square root program (**_that is broken - if anyone wants to it, debugging would be much appreciated_**). There is also a function the performs 3 multipled by 10 using repeated addition but this is commented out. 
 
 To use your own program, it must be in object code and passed to the `mos_6502_emulator` function. Then rerunning the emulator with `cargo run` should show the program loaded into the ram on page 80. **Note:** As the emulator debugger shows pages 0 and 80 of the ram, it is recommended to use the 0 page for variables so you can actually see something happen as 80 is where the program is read into.
 
