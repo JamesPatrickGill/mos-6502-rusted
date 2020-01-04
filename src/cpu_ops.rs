@@ -224,7 +224,7 @@ pub fn CLV(cpu: &mut CPU) -> u8 {
 
 pub fn CMP(cpu: &mut CPU) -> u8 {
     cpu.fetch();
-    cpu.temp = cpu.a.wrapping_sub(cpu.fetched).into();
+    cpu.temp = (cpu.a as u16).wrapping_sub(cpu.fetched as u16);
     cpu.set_flag(Flags::C as u8, cpu.a >= cpu.fetched);
     cpu.set_flag(Flags::Z as u8, cpu.temp.trailing_zeros() >= 8);
     cpu.set_flag(Flags::N as u8, cpu.temp & 0x0080 != 0);
@@ -232,7 +232,7 @@ pub fn CMP(cpu: &mut CPU) -> u8 {
 }
 pub fn CPX(cpu: &mut CPU) -> u8 {
     cpu.fetch();
-    cpu.temp = cpu.x as u16 - cpu.fetched as u16;
+    cpu.temp = (cpu.x as u16).wrapping_sub(cpu.fetched as u16);
     cpu.set_flag(Flags::C as u8, cpu.x >= cpu.fetched);
     cpu.set_flag(Flags::Z as u8, cpu.temp.trailing_zeros() >= 8);
     cpu.set_flag(Flags::N as u8, cpu.temp & 0x0080 != 0);
@@ -240,7 +240,7 @@ pub fn CPX(cpu: &mut CPU) -> u8 {
 }
 pub fn CPY(cpu: &mut CPU) -> u8 {
     cpu.fetch();
-    cpu.temp = cpu.y as u16 - cpu.fetched as u16;
+    cpu.temp = (cpu.y as u16).wrapping_sub(cpu.fetched as u16);
     cpu.set_flag(Flags::C as u8, cpu.y >= cpu.fetched);
     cpu.set_flag(Flags::Z as u8, cpu.temp.trailing_zeros() >= 8);
     cpu.set_flag(Flags::N as u8, cpu.temp & 0x0080 != 0);
@@ -397,7 +397,7 @@ pub fn PLP(cpu: &mut CPU) -> u8 {
 }
 pub fn ROL(cpu: &mut CPU) -> u8 {
     cpu.fetch();
-    cpu.temp = (cpu.fetched << 1) as u16 | cpu.get_flag(Flags::C as u8) as u16;
+    cpu.temp = ((cpu.fetched as u16) << 1) | cpu.get_flag(Flags::C as u8) as u16;
     cpu.set_flag(Flags::C as u8, cpu.temp & 0xFF00 != 0);
     cpu.set_flag(Flags::Z as u8, cpu.temp.trailing_zeros() >= 8);
     cpu.set_flag(Flags::N as u8, cpu.temp & 0x0080 != 0);
@@ -411,7 +411,7 @@ pub fn ROL(cpu: &mut CPU) -> u8 {
 }
 pub fn ROR(cpu: &mut CPU) -> u8 {
     cpu.fetch();
-    cpu.temp = (cpu.get_flag(Flags::C as u8) << 7) as u16 | (cpu.fetched >> 1) as u16;
+    cpu.temp = ((cpu.get_flag(Flags::C as u8) as u16) << 7) | ((cpu.fetched as u16) >> 1);
     cpu.set_flag(Flags::C as u8, cpu.fetched & 0x01 != 0);
     cpu.set_flag(Flags::Z as u8, cpu.temp.trailing_zeros() >= 8);
     cpu.set_flag(Flags::N as u8, cpu.temp & 0x0080 != 0);
