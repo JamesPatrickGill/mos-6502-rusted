@@ -1,6 +1,6 @@
-# MOS-6502-Rusted (_Currently a WIP_)
+# MOS-6502-Rusted
 
-The goal of this project was to create a simple, no frills emulation of the 6502 as a means to learn rust. As I was focussing 'discovering' the language myself and see first hand the differences between rust and older languages I stayed away from examples of rust based emulations and instead followed to direction of the ["One Lone Coder"](https://github.com/OneLoneCoder) and his youtube series on [emulating a NES](https://www.youtube.com/watch?v=nViZg02IMQo&list=PLrOv9FMX8xJHqMvSGB_9G9nZZ_4IgteYf) - similarities are therefore apparent.
+The goal of this project was to create a simple, no frills emulation of the 6502 as a means to learn rust. As I was focussing 'discovering' the language myself and see first hand the differences between rust and older languages I stayed away from examples of rust based emulations and instead followed the direction of the ["One Lone Coder"](https://github.com/OneLoneCoder) and his youtube series on [emulating a NES](https://www.youtube.com/watch?v=nViZg02IMQo&list=PLrOv9FMX8xJHqMvSGB_9G9nZZ_4IgteYf) - similarities are therefore apparent.
 
 I did try to make the debugger display a little more pleasing to look at however: 
 <p align="center">
@@ -28,7 +28,7 @@ Then press space to step through the code, one instruction at a time.
 
 ### Changing the program
 
-The emulator is preloaded with a square root program (**_that is broken - if anyone wants to it, debugging would be much appreciated_**). There is also a function the performs 3 multipled by 10 using repeated addition but this is commented out. 
+The emulator is preloaded with a square root program that square roots 64 (0x0040) stored in this is stored across the first two bytes of memory 0x0000 holding the high byte and 0x0001 holding the low byte. The root is then stored on 0x0010 and the remainder in 0x0011. There is also a function the performs 3 multipled by 10 using repeated addition but this is commented out. 
 
 To use your own program, it must be in object code and passed to the `mos_6502_emulator` function. Then rerunning the emulator with `cargo run` should show the program loaded into the ram on page 80. **Note:** As the emulator debugger shows pages 0 and 80 of the ram, it is recommended to use the 0 page for variables so you can actually see something happen as 80 is where the program is read into.
 
@@ -36,6 +36,7 @@ To use your own program, it must be in object code and passed to the `mos_6502_e
 
 * [Assembler - To compile Object Code](https://www.masswerk.at/6502/assembler.html)
 * [Examples of 6502 Source Code](http://6502.org/source/)
+* [More Examples of 6502 Source Code](http://6502org.wikidot.com/software)
 
 ## Reading the Debugger
 
@@ -63,8 +64,8 @@ The CPU State is described by its 5 registers.  This is rather complicated but t
 
 Simply this is a nice way to visualise the program running. The highlighted line is the next instruction to run, the first column is the ram address the instruction starts at, the second is the CPU operation to run and next comes either the value or address given to the operation, along with addressing mode contained in brackets. Notes square bracket contain the address a branch statement will jump to.
 
-## Why this is a WIP
+## Help
 
-This a quick and dirty implementation and there are some bugs in the emulation, hence WIP. The preloaded square root function is there to highlight this. I just wanted something out the door and as this is for fun, I can fix as I go. Also any one who wants to have a go at debugging or even fixing the code, please have a go - looking to learn and what better way than a code review. 
+This a quick and dirty implementation and there are most definitely some bugs in the emulation. I just wanted something out the door and as this is for fun, I can fix as I go. Therefpre any one who wants to have a go at debugging or even fixing the code, please have a go - looking to learn and what better way than a code review. 
 
-The goal of this as you may be able to tell is implement a very basic NES emulator.
+The future goal of this as you may be able to tell is implement a very basic NES emulator.
